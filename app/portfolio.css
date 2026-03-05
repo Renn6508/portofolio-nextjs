@@ -964,7 +964,7 @@
 .dash-stat-inner {
   background: var(--dark);
   border: 1px solid rgba(255,255,255,0.05);
-  padding: 2.5rem 2rem;
+  padding: 2rem 1.5rem;
   text-align: center;
   height: 100%;
   transition: background 0.4s, border-color 0.4s;
@@ -997,7 +997,7 @@
 }
 .dash-stat-value {
   font-family: var(--font-display);
-  font-size: 3.5rem;
+  font-size: 2.8rem;
   color: var(--white);
   line-height: 1;
   margin-bottom: 0.6rem;
@@ -1174,90 +1174,13 @@
   gap: 2rem;
   height: 100%;
 }
-.dash-waka-fallback {
-  flex: 1;
+.dash-waka-card {
+  background: var(--mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 2rem;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 1rem;
-}
-.dash-waka-icon {
-  font-size: 3rem;
-  margin-bottom: 1.2rem;
-}
-.dash-waka-title {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.8rem;
-  color: var(--white);
-}
-.dash-waka-desc {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.7;
-  max-width: 280px;
-  margin-bottom: 1.5rem;
-}
-.dash-waka-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-cond);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--red);
-  padding: 0.7rem 1.5rem;
-  border: 1px solid rgba(232,0,30,0.3);
-  transition: all 0.3s;
-}
-.dash-waka-link:hover {
-  background: var(--red);
-  color: var(--white);
-  border-color: var(--red);
-}
-.dash-waka-visual {
-  display: flex;
-  justify-content: center;
-}
-.dash-waka-chart-img {
-  max-width: 100%;
-  height: auto;
-}
-.dash-waka-data {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-.dash-waka-total {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.dash-waka-total-label {
-  font-family: var(--font-cond);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.dash-waka-total-value {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  color: var(--white);
-  line-height: 1;
-}
-.dash-waka-langs {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
 }
 
 /* ── Recent Repos Grid ── */
@@ -1980,7 +1903,7 @@
   .skill-categories { grid-template-columns: 1fr; gap: 3rem; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .footer-brand-col { padding-right: 0; }
-  .dash-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-stats-grid { grid-template-columns: repeat(4, 1fr); }
   .dash-two-col { grid-template-columns: 1fr; }
   .dash-repos-grid { grid-template-columns: 1fr; }
 }
@@ -1998,7 +1921,7 @@
   .work-preview-grid { grid-template-columns: 1fr; }
   .modal-hero { height: 200px; }
   .modal-body { padding: 0 1.5rem 2.5rem; }
-  .dash-stats-grid { grid-template-columns: 1fr 1fr; }
+  .dash-stats-grid { grid-template-columns: repeat(2, 1fr); }
   .dash-header { flex-direction: column; align-items: flex-start; }
   .dash-subtitle { text-align: left; }
   .dashboard { padding: 6rem 0; }
@@ -2007,166 +1930,207 @@
 
 /* ── WAKATIME DASHBOARD CLONE ── */
 .dash-wakatime-clone {
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 1.5rem;
-  font-family: 'Inter', -apple-system, sans-serif;
-  color: #fff;
+  background: transparent;
+  padding: 0;
+  font-family: var(--font-body);
+  color: var(--white);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .wakatime-clone-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 .wakatime-clone-icon-wrapper {
-  background: #2d6bdf;
+  background: linear-gradient(135deg, #4FC3F7 0%, #2196F3 100%);
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(79,195,247,0.3);
 }
 
 .wakatime-clone-title {
-  font-size: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
   font-weight: 600;
   margin: 0;
   line-height: 1.2;
+  letter-spacing: 0.05em;
+  color: var(--white);
 }
 
 .wakatime-clone-subtitle {
-  font-size: 0.8rem;
-  color: #8A9BAD;
+  font-family: var(--font-cond);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
   margin: 2px 0 0 0;
 }
 
 .wakatime-clone-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .wakatime-clone-card {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: 6px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.wakatime-clone-card:hover {
+  background: rgba(79,195,247,0.05);
+  border-color: rgba(79,195,247,0.15);
 }
 
 .wakatime-card-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #8A9BAD;
-  margin-bottom: 8px;
-  letter-spacing: 0.05em;
+  font-family: var(--font-cond);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 .wakatime-card-value {
-  font-size: 1.1rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--white);
+  line-height: 1.2;
 }
 
 .wakatime-card-sub {
-  font-size: 0.8rem;
-  color: #8A9BAD;
-  margin-top: 4px;
+  font-family: var(--font-cond);
+  font-size: 0.65rem;
+  color: rgba(138,155,173,0.6);
+  margin-top: 2px;
+  letter-spacing: 0.1em;
 }
 
 .wakatime-clone-banner {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 16px 20px;
+  background: rgba(79,195,247,0.06);
+  border: 1px solid rgba(79,195,247,0.12);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+  transition: background 0.3s;
+}
+
+.wakatime-clone-banner:hover {
+  background: rgba(79,195,247,0.08);
 }
 
 .wakatime-banner-left {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #e5e7eb;
+  gap: 10px;
+  font-family: var(--font-cond);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(245,240,235,0.8);
 }
 
 .wakatime-banner-left svg {
-  color: #9f7aea;
+  color: #4FC3F7;
 }
 
 .wakatime-banner-right {
-  font-size: 0.95rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--white);
+  letter-spacing: 0.05em;
 }
 
 .wakatime-clone-langs {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 20px;
+  border-radius: 6px;
+  padding: 1.2rem;
+  flex: 1;
 }
 
 .wakatime-langs-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.2rem;
 }
 
 .wakatime-langs-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #8A9BAD;
-  letter-spacing: 0.05em;
+  font-family: var(--font-cond);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
 }
 
 .wakatime-langs-title svg {
-  color: #10b981;
+  color: #4FC3F7;
 }
 
 .wakatime-langs-badge {
-  background: rgba(255, 255, 255, 0.08);
-  font-size: 0.75rem;
-  padding: 2px 8px;
+  background: rgba(79,195,247,0.1);
+  border: 1px solid rgba(79,195,247,0.2);
+  font-family: var(--font-cond);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
   border-radius: 12px;
-  color: #8A9BAD;
+  color: #4FC3F7;
 }
 
 .wakatime-langs-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1rem;
 }
 
 .wakatime-lang-row {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .wakatime-lang-name {
-  width: 100px;
-  font-size: 0.85rem;
-  color: #e5e7eb;
+  width: 90px;
+  font-family: var(--font-cond);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(245,240,235,0.8);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
@@ -2174,11 +2138,12 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .wakatime-lang-bar-wrapper {
   flex: 1;
-  height: 6px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 3px;
   overflow: hidden;
@@ -2187,26 +2152,34 @@
 .wakatime-lang-bar {
   height: 100%;
   border-radius: 3px;
+  transition: width 0.6s ease;
 }
 
 .wakatime-lang-pct {
-  width: 35px;
+  width: 40px;
   text-align: right;
-  font-size: 0.85rem;
-  color: #8A9BAD;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
   flex-shrink: 0;
 }
 
 .wakatime-clone-footer {
-  margin-top: 16px;
-  font-size: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-family: var(--font-cond);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
   color: rgba(138, 155, 173, 0.5);
   display: flex;
   justify-content: space-between;
 }
 
 @media (max-width: 768px) {
-  .wakatime-clone-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .wakatime-clone-banner { flex-direction: column; gap: 12px; align-items: flex-start; }
-  .wakatime-lang-name { width: 80px; }
+  .wakatime-clone-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .wakatime-clone-banner { flex-direction: column; gap: 10px; align-items: flex-start; }
+  .wakatime-lang-name { width: 70px; font-size: 0.7rem; }
+  .wakatime-lang-pct { width: 35px; font-size: 0.8rem; }
 }

@@ -5,7 +5,9 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SpotlightCard from '@/components/interactive/SpotlightCard'
 import SplitText from '@/components/interactive/SplitText'
-import { GITHUB_USERNAME, WAKATIME_USERNAME } from '@/lib/data'
+import { GITHUB_USERNAME } from '@/lib/data'
+import WakatimeStats from '@/components/ui/WakatimeStats'
+
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
@@ -35,6 +37,10 @@ export default function Dashboard() {
     followers: 0,
     following: 0,
     totalStars: 0,
+    totalForks: 0,
+    totalCommits: 0,
+    commitStreak: 0,
+    recentCommits: 0,
     topLanguages: [] as Array<{ name: string; percentage: number }>,
     recentRepos: [] as Array<any>,
     loading: true,
@@ -44,61 +50,46 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchGithubStats = async () => {
       try {
-        const [userRes, reposRes] = await Promise.all([
-          fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
-          fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`),
-        ])
+        const res = await fetch('/api/github/stats')
+        
+        if (!res.ok) {
+          throw new Error('GitHub API error')
+        }
 
-        if (!userRes.ok || !reposRes.ok) throw new Error('GitHub API error')
+        const data = await res.json()
 
-        const userData = await userRes.json()
-        const reposData = await reposRes.json()
-
-        const totalStars = reposData.reduce((sum: number, repo: any) => sum + (repo.stargazers_count || 0), 0)
-
-        const langMap: Record<string, number> = {}
-        reposData.forEach((repo: any) => {
-          if (repo.language) {
-            langMap[repo.language] = (langMap[repo.language] || 0) + 1
-          }
-        })
-        const topLanguages = Object.entries(langMap)
-          .sort((a, b) => b[1] - a[1])
-          .slice(0, 6)
-          .map(([name, count]) => ({
-            name,
-            percentage: Math.round((count / reposData.filter((r: any) => r.language).length) * 100),
-          }))
-
-        const recentRepos = reposData
-          .filter((r: any) => !r.fork)
-          .slice(0, 4)
-          .map((r: any) => ({
-            name: r.name,
-            description: r.description || 'No description',
-            stars: r.stargazers_count,
-            forks: r.forks_count,
-            language: r.language,
-            url: r.html_url,
-            updatedAt: new Date(r.updated_at).toLocaleDateString('en-US', {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric',
-            }),
-          }))
-
+        // Use fallback values if data is missing
         setGhStats({
-          publicRepos: userData.public_repos,
-          followers: userData.followers,
-          following: userData.following,
-          totalStars,
-          topLanguages,
-          recentRepos,
+          publicRepos: data.publicRepos || 0,
+          followers: data.followers || 0,
+          following: data.following || 0,
+          totalStars: data.totalStars || 0,
+          totalForks: data.totalForks || 0,
+          totalCommits: data.totalCommits || 0,
+          commitStreak: data.commitStreak || 0,
+          recentCommits: data.recentCommits || 0,
+          topLanguages: data.topLanguages || [],
+          recentRepos: data.recentRepos || [],
           loading: false,
           error: false,
         })
-      } catch {
-        setGhStats((prev) => ({ ...prev, loading: false, error: true }))
+      } catch (error) {
+        console.error('Failed to fetch GitHub stats:', error)
+        // Set mock data on error
+        setGhStats({
+          publicRepos: 15,
+          followers: 12,
+          following: 12,
+          totalStars: 0,
+          totalForks: 0,
+          totalCommits: 0,
+          commitStreak: 0,
+          recentCommits: 0,
+          topLanguages: [],
+          recentRepos: [],
+          loading: false,
+          error: true,
+        })
       }
     }
 
@@ -183,6 +174,18 @@ export default function Dashboard() {
               color: 'rgba(247,223,30,0.12)',
             },
             {
+              icon: '🔥',
+              value: ghStats.loading ? '...' : ghStats.totalCommits,
+              label: 'Total Commits',
+              color: 'rgba(255,87,34,0.12)',
+            },
+            {
+              icon: '📊',
+              value: ghStats.loading ? '...' : ghStats.commitStreak === 0 ? '0 days' : `${ghStats.commitStreak} days`,
+              label: 'Commit Streak',
+              color: 'rgba(76,175,80,0.12)',
+            },
+            {
               icon: '👥',
               value: ghStats.loading ? '...' : ghStats.followers,
               label: 'Followers',
@@ -193,6 +196,18 @@ export default function Dashboard() {
               value: ghStats.loading ? '...' : ghStats.following,
               label: 'Following',
               color: 'rgba(129,199,132,0.12)',
+            },
+            {
+              icon: '🍴',
+              value: ghStats.loading ? '...' : ghStats.totalForks,
+              label: 'Total Forks',
+              color: 'rgba(156,39,176,0.12)',
+            },
+            {
+              icon: '💻',
+              value: ghStats.loading ? '...' : ghStats.recentCommits,
+              label: 'This Week',
+              color: 'rgba(33,150,243,0.12)',
             },
           ].map((stat) => (
             <div className="dash-stat-card" key={stat.label}>
@@ -284,16 +299,7 @@ export default function Dashboard() {
               <span>WAKATIME STATS</span>
             </div>
             <SpotlightCard className="dash-waka-card" spotlightColor="rgba(79,195,247,0.08)">
-              <div className="dash-waka-embed">
-                <div className="dash-waka-fallback">
-                  <div className="dash-waka-icon">⏱️</div>
-                  <h4 className="dash-waka-title">Coding Activity</h4>
-                  <p className="dash-waka-desc">Track my real-time coding activity and language breakdown on WakaTime.</p>
-                  <a href={`https://wakatime.com/@${WAKATIME_USERNAME}`} target="_blank" rel="noopener noreferrer" className="dash-waka-link">
-                    View on WakaTime <span>↗</span>
-                  </a>
-                </div>
-              </div>
+              <WakatimeStats />
             </SpotlightCard>
           </div>
         </div>
@@ -339,6 +345,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      
     </section>
   )
 }
