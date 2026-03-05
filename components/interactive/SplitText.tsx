@@ -17,7 +17,7 @@ interface SplitTextProps {
   y?: number
   stagger?: number
   triggerOnScroll?: boolean
-  tag?: keyof JSX.IntrinsicElements
+  tag?: 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div'
 }
 
 export default function SplitText({
