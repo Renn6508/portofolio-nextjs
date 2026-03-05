@@ -14,24 +14,24 @@ export default function Loader({ onDone }: LoaderProps) {
   useEffect(() => {
     let n = 0
     const iv = setInterval(() => {
-      n += Math.random() * 12
+      n += Math.random() * 15
       if (n >= 100) {
         n = 100
         clearInterval(iv)
       }
       setPct(Math.floor(n))
-    }, 80)
+    }, 60)
 
     const t = setTimeout(() => {
       if (ref.current) {
         gsap.to(ref.current, {
           yPercent: -100,
-          duration: 1.0,
+          duration: 0.8,
           ease: 'power3.inOut',
           onComplete: onDone,
         })
       }
-    }, 2200)
+    }, 2000)
 
     return () => {
       clearInterval(iv)
