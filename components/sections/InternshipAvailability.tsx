@@ -42,7 +42,7 @@ export default function InternshipAvailability() {
           <div className="internship-content">
             <div className="internship-item">
               <span className="internship-label">INTERNSHIP PLAN</span>
-              <p className="internship-value">1 July 2026 - 31 December 2026</p>
+              <p className="internship-value">1 July - 31 December 2026</p>
             </div>
             <div className="internship-divider" />
             <div className="internship-item">
