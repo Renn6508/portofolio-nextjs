@@ -56,7 +56,7 @@ export default function Contact() {
         <div className="contact-inner">
           <div ref={leftRef}>
             <span className="section-label">Get In Touch</span>
-            <SplitText text="LET'S WORK TOGETHER" className="contact-cta" tag="h2" stagger={0.05} y={50} duration={0.7} />
+            <SplitText text="LET'S WORK          TOGETHER" className="contact-cta" tag="h2" stagger={0.05} y={50} duration={0.7} />
             <p className="contact-body">
               Saya adalah mahasiswa magang yang siap berkontribusi dan belajar. Jangan ragu untuk menghubungi saya melalui informasi kontak
               berikut.
