@@ -66,7 +66,7 @@ export default function About() {
             <TiltedCard maxTilt={8} scale={1.02}>
               <img
                 className="about-image"
-                src="https://i.pinimg.com/736x/49/7d/36/497d366b9d8f08b07bd5bb582ba4c35d.jpg"
+                src="photo/photo.jpeg"
                 alt="Profile"
               />
             </TiltedCard>
